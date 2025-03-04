@@ -9,7 +9,7 @@ import Script from "next/script";
 const { publicRuntimeConfig } = getConfig();
 
 // @lib
-// import { useStoreContext } from "@lib/context/store/StoreContext";
+import { useStoreContext } from "@lib/context/store/StoreContext";
 import { nonceSha256 } from "@lib/helper/TrackingAnalytics";
 import {
   getFetch,
@@ -21,11 +21,11 @@ import {
 import HeadGraphSeo from "@components/Head";
 import Main from "@components/Main";
 import Container from "@components/Container";
-// import TicketProductsSkeleton from "@components/Skeleton/Products/TicketProducts";
-// const TicketProducts = dynamic(() => import("@components/UI/TicketProducts"), {
-//   loading: () => <TicketProductsSkeleton />,
-//   ssr: false,
-// });
+import TicketProductsSkeleton from "@components/Skeleton/Products/TicketProducts";
+const TicketProducts = dynamic(() => import("@components/UI/TicketProducts"), {
+  loading: () => <TicketProductsSkeleton />,
+  ssr: false,
+});
 
 // @layouts
 import LayoutStore from "@layouts/LayoutStore";
@@ -40,9 +40,9 @@ import Abouts from "@layouts/Abouts";
 // import FAQ from "@layouts/FAQ";
 // import MoonPortalBanner from "@layouts/Banner/MoonPortalBanner";
 
-const Home = ({ mode, collections }) => {
-  // const { getStore, sessionsProducts } = useStoreContext();
-  // const [isProducts, setProducts] = useState(products?.data);
+const Home = ({ mode, collections, products }) => {
+  const { getStore, sessionsProducts } = useStoreContext();
+  const [isProducts, setProducts] = useState(products?.data);
   const [isCollections, setCollections] = useState({
     aboutus: collections?.aboutus,
     // speakers: collections?.speakers,
@@ -140,6 +140,45 @@ const Home = ({ mode, collections }) => {
         {/* @about-us */}
         <Abouts mode={mode} result={isCollections?.aboutus} />
         {/* @tickets */}
+        <section className="ca25Ticket-Section pb-24 pt-[92px] sm:pt-32 lg:pt-28 xl:pt-[144px]">
+          <Container className={"relative"}>
+            <div className="ca25MoonRckt !pointer-events-none absolute inset-x-0 inset-y-0 z-px mx-auto w-full !select-none"></div>
+
+            <div className="mb-8 flex flex-col items-center justify-center text-center sm:mb-12">
+              <h2
+                className={`ca25HeadingTitle w-full text-center font-bold uppercase ${mode === "light" ? "text-black-900" : "text-white"} text-balance`}
+              >
+                {"GET YOUR TICKETS NOW"
+                  ?.split("")
+                  .map((chr, i) =>
+                    ["E", "O"].includes(chr) ? <span key={i}>{chr}</span> : chr
+                  )}
+              </h2>
+              <p className="mt-2 font-bevietnamPro text-base font-light text-gray-300 sm:mt-3.5 sm:text-xl">
+                {`Prices exclude VAT`}
+              </p>
+            </div>
+            {/* @products */}
+            <div className="mt-4 grid-cols-1 gap-x-4 gap-y-4 supports-grid:grid sm:mt-10 sm:grid-cols-2 xl:grid-cols-3">
+              {isProducts?.slice(0, 6).map((gtRslt, i) => {
+                return (
+                  <Fragment key={i}>
+                    <TicketProducts
+                      useHeading={"h3"}
+                      data={gtRslt}
+                      cartProducts={getStore}
+                      isLoading={
+                        sessionsProducts?.id_product === gtRslt.documentId &&
+                        sessionsProducts?.loading === true
+                      }
+                      isSessionLoading={sessionsProducts?.loading}
+                    />
+                  </Fragment>
+                );
+              })}
+            </div>
+          </Container>
+        </section>
         {/* @banner(portal) */}
         {/* <PortalBanner mode={mode} id={"ca25PortalBanner0"} /> */}
         {/* @speakers */}
@@ -164,7 +203,7 @@ const Home = ({ mode, collections }) => {
         {/* <MoonPortalBanner mode={mode} /> */}
       </Main>
       {/* @alert(toast)  */}
-      {/* <Toaster
+      <Toaster
         position="bottom-left"
         richColors
         gap="10"
@@ -174,7 +213,7 @@ const Home = ({ mode, collections }) => {
         toastOptions={{
           className: "ca25ToastAlert-Store",
         }}
-      /> */}
+      />
     </>
   );
 };
@@ -244,7 +283,7 @@ export const getServerSideProps = async (context) => {
           //   communityPartners: rsCommunityPartners || null,
           // },
         },
-        // products: rsProducts || [],
+        products: rsProducts || [],
       },
     };
   } catch (err) {

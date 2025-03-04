@@ -13,10 +13,10 @@ import "@styles/globals.css";
 import PrelineScript from "@components/Script/PrelineScript";
 
 // @redux
-// import { Provider } from 'react-redux';
-// import store from '@reduxState/store';
-// import { GlobalProvider } from '@lib/context/GlobalContext';
-// import { StoreProvider } from '@lib/context/store/StoreContext';
+import { Provider } from "react-redux";
+import store from "@reduxState/store";
+// import { GlobalProvider } from "@lib/context/GlobalContext";
+import { StoreProvider } from "@lib/context/store/StoreContext";
 
 // @layouts
 import LayoutDefaults from "@layouts/Layouts";
@@ -55,11 +55,11 @@ const App = ({ Component, pageProps }) => {
       return (
         <>
           {/* <GlobalProvider> */}
-          {/* <StoreProvider> */}
-          <LayoutDefaults>
-            <Component {...pageProps} />
-          </LayoutDefaults>
-          {/* </StoreProvider> */}
+          <StoreProvider>
+            <LayoutDefaults>
+              <Component {...pageProps} />
+            </LayoutDefaults>
+          </StoreProvider>
           {/* </GlobalProvider> */}
         </>
       );
@@ -68,37 +68,43 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <>
-      {/* <Provider store={store}> */}
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
-        <meta name="description" content={publicRuntimeConfig?.siteDesc} />
-        <meta name="author" content={"Coinfest Asia"} />
-        <link rel="mask-icon" href="/favicon.ico" color="#1F1F1F" />
-        <meta name="msapplication-TileColor" content="#1F1F1F" />
-        <meta name="theme-color" content="#F8FAFC" />
-        <meta name="msapplication-navbutton-color" content="#F8FAFC" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="#F8FAFC" />
-        <link rel="manifest" href="/manifest.json" />
-      </Head>
+      <Provider store={store}>
+        <Head>
+          <meta charSet="UTF-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+          <meta name="description" content={publicRuntimeConfig?.siteDesc} />
+          <meta name="author" content={"Coinfest Asia"} />
+          <link rel="mask-icon" href="/favicon.ico" color="#1F1F1F" />
+          <meta name="msapplication-TileColor" content="#1F1F1F" />
+          <meta name="theme-color" content="#F8FAFC" />
+          <meta name="msapplication-navbutton-color" content="#F8FAFC" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="#F8FAFC"
+          />
+          <link rel="manifest" href="/manifest.json" />
+        </Head>
 
-      {/* @layouts */}
-      {/* <GlobalProvider> */}
-      {/* <StoreProvider> */}
-      {getLayout(<Component {...pageProps} />, {
-        pageProps: pageProps || {},
-      })}
-      {/* </StoreProvider> */}
-      {/* </GlobalProvider> */}
+        {/* @layouts */}
+        {/* <GlobalProvider> */}
+        <StoreProvider>
+          {getLayout(<Component {...pageProps} />, {
+            pageProps: pageProps || {},
+          })}
+        </StoreProvider>
+        {/* </GlobalProvider> */}
 
-      {/* @script */}
-      <PrelineScript />
-      {/* </Provider> */}
+        {/* @script */}
+        <PrelineScript />
+      </Provider>
     </>
   );
 };

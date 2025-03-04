@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { twMerge } from 'tailwind-merge';
-import getConfig from 'next/config';
-import Image from 'next/image';
-import MarkdownRenderer from '@components/MarkdownRenderer';
+import React, { useState, useEffect } from "react";
+import { twMerge } from "tailwind-merge";
+import getConfig from "next/config";
+import Image from "next/image";
+import MarkdownRenderer from "@components/MarkdownRenderer";
 
 // # @get .config
 const { publicRuntimeConfig } = getConfig();
 
 // @lib
-import { useStoreContext } from '@lib/context/store/StoreContext';
-import { useTrackingStore } from '@lib/hooks/tracking-store/TrackingStore';
-import { getPriceDiscountDisplay } from '@lib/helper/Configuration';
-import { currencyConverter } from '@lib/helper/CalculateCart';
-import { useMethod } from '@lib/hooks/Method';
+import { useStoreContext } from "@lib/context/store/StoreContext";
+import { useTrackingStore } from "@lib/hooks/tracking-store/TrackingStore";
+import { getPriceDiscountDisplay } from "@lib/helper/Configuration";
+import { currencyConverter } from "@lib/helper/CalculateCart";
+import { useMethod } from "@lib/hooks/Method";
 
 // @components
-import PreSaleCountdown from '@components/PreSaleCountdown';
+import PreSaleCountdown from "@components/PreSaleCountdown";
 
 const TicketProducts = ({
   isPage = false,
-  useHeading = 'h3',
+  useHeading = "h3",
   data,
   cartProducts = [],
   isLoading,
@@ -42,7 +42,7 @@ const TicketProducts = ({
   });
   // @card(theme)
   const style = {
-    rc33x0dgm6tm707jghffuip4: 'ca25Products_VIP',
+    rc33x0dgm6tm707jghffuip4: "ca25Products_VIP",
   };
 
   // @discount-price
@@ -73,11 +73,11 @@ const TicketProducts = ({
   // @add-tracking-id
   const trackingButtonId = (documentId, name, isPage) => {
     const ids = {
-      g1ukadil4n4a3r0ndly7jl42: isPage ? 'fest-buy-tix' : 'fest-buy-hp',
-      sn4ujm0d1ebbc8lme1ihzsa9: isPage ? 'group-buy-tix' : 'group-buy-hp',
-      rc33x0dgm6tm707jghffuip4: isPage ? 'bull-buy-tix' : 'bull-buy-hp',
+      g1ukadil4n4a3r0ndly7jl42: isPage ? "fest-buy-tix" : "fest-buy-hp",
+      sn4ujm0d1ebbc8lme1ihzsa9: isPage ? "group-buy-tix" : "group-buy-hp",
+      rc33x0dgm6tm707jghffuip4: isPage ? "bull-buy-tix" : "bull-buy-hp",
     };
-    return ids[documentId] || `ca25Btn_Product${name.replace(/\s/g, '')}`;
+    return ids[documentId] || `ca25Btn_Product${name.replace(/\s/g, "")}`;
   };
 
   return (
@@ -85,14 +85,14 @@ const TicketProducts = ({
       <div
         className={twMerge(
           `ca25Products relative flex h-auto flex-col rounded-2xl bg-transparent sm:rounded-[20px] lg:h-[569px]`,
-          style[data?.documentId] || ''
+          style[data?.documentId] || ""
         )}
       >
-        {data?.documentId === 'g1ukadil4n4a3r0ndly7jl42' ? (
+        {data?.documentId === "g1ukadil4n4a3r0ndly7jl42" ? (
           <div className="absolute inset-x-0 -top-[21px] bottom-auto z-[4] text-center lg:-top-[26px]">
             <Image
               className="mx-auto aspect-auto h-[46px] w-auto lg:h-[54px]"
-              src={'/assets/images/store/ca25PreSale-FestivalTicket.svg'}
+              src={"/assets/images/store/ca25PreSale-FestivalTicket.svg"}
               alt={`${publicRuntimeConfig?.siteAppName} Save Pre Sale Ticket`}
               height={96}
               width={81}
@@ -101,21 +101,21 @@ const TicketProducts = ({
           </div>
         ) : null}
         <div
-          className={`ca25Products_Card relative flex h-full flex-col items-start justify-between overflow-hidden rounded-2xl px-4 pb-4 pt-9 sm:rounded-[20px] sm:px-4.5 sm:pb-4.5 sm:pt-9 lg:px-6 lg:pb-6 lg:pt-11 ${data?.documentId === 'g1ukadil4n4a3r0ndly7jl42' ? 'ca25BestSaleProducts' : null}`}
+          className={`ca25Products_Card relative flex h-full flex-col items-start justify-between overflow-hidden rounded-2xl px-4 pb-4 pt-9 sm:rounded-[20px] sm:px-4.5 sm:pb-4.5 sm:pt-9 lg:px-6 lg:pb-6 lg:pt-11 ${data?.documentId === "g1ukadil4n4a3r0ndly7jl42" ? "ca25BestSaleProducts" : null}`}
         >
           <div className="flex w-full flex-col items-start pb-18 lg:pb-0">
             <div className="relative block w-full">
-              {useHeading === 'h2' ? (
+              {useHeading === "h2" ? (
                 <h2 className="mb-1.5 text-xl font-bold uppercase leading-initial sm:mb-2 sm:text-[22px] sm:leading-initial">
-                  {data?.documentId === 'g1ukadil4n4a3r0ndly7jl42'
-                    ? 'Festival Ticket'
-                    : data?.name || 'Ticket Products'}
+                  {data?.documentId === "g1ukadil4n4a3r0ndly7jl42"
+                    ? "Festival Ticket"
+                    : data?.name || "Ticket Products"}
                 </h2>
               ) : (
                 <h3 className="mb-1.5 text-xl font-bold uppercase leading-initial sm:mb-2 sm:text-[22px] sm:leading-initial">
-                  {data?.documentId === 'g1ukadil4n4a3r0ndly7jl42'
-                    ? 'Festival Ticket'
-                    : data?.name || 'Ticket Products'}
+                  {data?.documentId === "g1ukadil4n4a3r0ndly7jl42"
+                    ? "Festival Ticket"
+                    : data?.name || "Ticket Products"}
                 </h3>
               )}
               <div className="inline-flex items-start space-x-2.5">
@@ -129,7 +129,7 @@ const TicketProducts = ({
                 )}
               </div>
             </div>
-            {data?.documentId !== 'rc33x0dgm6tm707jghffuip4' ? (
+            {data?.documentId !== "rc33x0dgm6tm707jghffuip4" ? (
               <div className="my-4 inline-flex w-full flex-row justify-between text-sm font-bold uppercase text-primaryYellow lg:text-base">
                 <span>{`PRICE INCREASE IN`}</span>
                 <span>
@@ -144,7 +144,7 @@ const TicketProducts = ({
             )}
 
             <div className="block w-full pt-2">
-              {data?.documentId === 'rc33x0dgm6tm707jghffuip4' && (
+              {data?.documentId === "rc33x0dgm6tm707jghffuip4" && (
                 <span className="mb-3.5 flex flex-row items-center justify-start text-base font-medium sm:text-lg">
                   <svg
                     className="ml-[3px] mr-[12px] size-5 shrink-0 sm:ml-[1px] sm:mr-[11px] sm:size-6"
@@ -169,7 +169,7 @@ const TicketProducts = ({
             </div>
           </div>
           <div
-            className={`flex w-full flex-row items-end ${isSessionProducts?.checkProduct === true ? 'justify-between' : 'justify-end'}`}
+            className={`flex w-full flex-row items-end ${isSessionProducts?.checkProduct === true ? "justify-between" : "justify-end"}`}
           >
             {isSessionProducts?.checkProduct === true && (
               <div className={`flex flex-col items-start`}>
@@ -181,7 +181,7 @@ const TicketProducts = ({
                   aria-labelledby="Button update quantity Cart (Coinfest Asia 2025)"
                 >
                   <div className="inline-flex flex-row gap-x-1.5">
-                    {data?.documentId !== 'sn4ujm0d1ebbc8lme1ihzsa9' ? (
+                    {data?.documentId !== "sn4ujm0d1ebbc8lme1ihzsa9" ? (
                       <>
                         <button
                           id="ca25Btn_MinQtyCarts"
@@ -263,7 +263,7 @@ const TicketProducts = ({
                           </svg>
                         </button>
                       </>
-                    ) : data?.documentId === 'sn4ujm0d1ebbc8lme1ihzsa9' ? (
+                    ) : data?.documentId === "sn4ujm0d1ebbc8lme1ihzsa9" ? (
                       <input
                         className={`pointer-events-none w-5 cursor-default select-none border-0 bg-transparent p-0 text-center text-sm font-light text-black-900 focus:ring-0 focus-visible:outline-none focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
                         type="number"
@@ -282,15 +282,15 @@ const TicketProducts = ({
             )}
             {isSessionProducts?.checkProduct === true ? (
               <button
-                id={`ca25AddedBtn_Product${data?.name.replace(/\s/g, '')}`}
-                className={`ca25ProductsBtn ca25DL_ViewProduct actived relative inline-flex w-[169px] items-center justify-center rounded-xl px-4 py-4 font-semibold uppercase disabled:pointer-events-none disabled:opacity-90 sm:px-6 sm:py-5 ${!sessionsProducts ? 'cursor-default' : 'cursor-pointer'}`}
+                id={`ca25AddedBtn_Product${data?.name.replace(/\s/g, "")}`}
+                className={`ca25ProductsBtn ca25DL_ViewProduct actived relative inline-flex w-[169px] items-center justify-center rounded-xl px-4 py-4 font-semibold uppercase disabled:pointer-events-none disabled:opacity-90 sm:px-6 sm:py-5 ${!sessionsProducts ? "cursor-default" : "cursor-pointer"}`}
                 role="button"
-                aria-label={`Button ${data?.name.replace(/\s/g, '')} Products Coinfest Asia 2025`}
+                aria-label={`Button ${data?.name.replace(/\s/g, "")} Products Coinfest Asia 2025`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleOverlayPopUp(
-                    '.ca2025BckdrpOverflay_PopUpMobile',
-                    '.ca2025CartPopUp_Mobile'
+                    ".ca2025BckdrpOverflay_PopUpMobile",
+                    ".ca2025CartPopUp_Mobile"
                   );
                   trackingViewProduct(getStore, totalOrder, true);
                 }}
@@ -300,9 +300,9 @@ const TicketProducts = ({
             ) : (
               <button
                 id={trackingButtonId(data?.documentId, data?.name, isPage)}
-                className={`ca25ProductsBtn ca25DL_ViewProduct relative inline-flex w-[169px] items-center justify-center rounded-xl px-4 py-4 font-semibold uppercase disabled:pointer-events-none disabled:opacity-90 sm:px-6 sm:py-5 ${!sessionsProducts ? 'cursor-default' : 'cursor-pointer'}`}
+                className={`ca25ProductsBtn ca25DL_ViewProduct relative inline-flex w-[169px] items-center justify-center rounded-xl px-4 py-4 font-semibold uppercase disabled:pointer-events-none disabled:opacity-90 sm:px-6 sm:py-5 ${!sessionsProducts ? "cursor-default" : "cursor-pointer"}`}
                 role="button"
-                aria-label={`Button ${data?.name.replace(/\s/g, '')} Products Coinfest Asia 2025`}
+                aria-label={`Button ${data?.name.replace(/\s/g, "")} Products Coinfest Asia 2025`}
                 data-layer-id={trackingButtonId(
                   data?.documentId,
                   data?.name,
@@ -317,14 +317,14 @@ const TicketProducts = ({
               >
                 {isLoading ? (
                   <div
-                    className={`ca25ProductsBtn_Loading block size-6 animate-spin items-center justify-center rounded-full border-[2.5px] ${data?.documentId === 'rc33x0dgm6tm707jghffuip4' ? 'border-white' : 'border-black-900'} border-t-transparent font-medium opacity-80`}
+                    className={`ca25ProductsBtn_Loading block size-6 animate-spin items-center justify-center rounded-full border-[2.5px] ${data?.documentId === "rc33x0dgm6tm707jghffuip4" ? "border-white" : "border-black-900"} border-t-transparent font-medium opacity-80`}
                     role="status"
                     aria-label="Coinfest Asia 2025 (Loading Products)"
                   >
                     <span className="sr-only">Loading...</span>
                   </div>
                 ) : (
-                  'Buy Ticket'
+                  "Buy Ticket"
                 )}
               </button>
             )}
