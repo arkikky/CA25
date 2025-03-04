@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Main = ({ className = null, children }) => {
   const isDfltClss = `ca25MainApps`;

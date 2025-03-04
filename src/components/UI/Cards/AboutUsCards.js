@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
 // @components
-import ImagesLoads from '@components/ImagesLoads';
+import ImagesLoads from "@components/ImagesLoads";
 
-const AboutUsCards = ({ images = '', title = '', shortDesc = '' }) => {
+const AboutUsCards = ({ images = "", title = "", shortDesc = "" }) => {
   return (
     <>
       <div className="relative flex h-full flex-col items-start justify-start overflow-clip rounded-2xl border border-solid border-white/55 bg-black-900/[0.24] sm:border-2">
         <div className="relative h-[146px] w-full shrink-0 sm:h-[150px] xl:h-[180px]">
           <ImagesLoads
-            classname={'aspect-auto h-full w-full object-cover object-center'}
+            classname={"aspect-auto h-full w-full object-cover object-center"}
             src={images}
             alt={`About ${title}`}
             height={180}
